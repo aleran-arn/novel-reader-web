@@ -1,5 +1,5 @@
 //Import Novel Model
-var Novel = require('@novelreader/core/model/Novel');
+var Novel = require('../model/Novel');
 //For list
 exports.list = async function (req, res) {
     try {

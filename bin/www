@@ -7,9 +7,12 @@
 const app = require('../app');
 const debug = require('debug')('web:server');
 const http = require('http');
+const mongoose = require('mongoose');
 
-const db = require('@novelreader/core/index');
+const dbConf = require('../config/db');
 
+const options = { useNewUrlParser: true, useUnifiedTopology: true };
+const connection =  mongoose.connect(dbConf.url, options);
 /**
  * Get port from environment and store in Express.
  */
@@ -25,13 +28,13 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-db.dbConnection.then(() => {
+connection.then(() => {
   console.log('connected');
   server.listen(port);
 })
-.catch(error => {
-  console.log(error, 'error');
-});
+  .catch(error => {
+    console.log(error, 'error');
+  });
 
 
 server.on('error', onError);

@@ -4,13 +4,11 @@
  * Module dependencies.
  */
 
-let app = require('../app');
-let debug = require('debug')('web:server');
-let http = require('http');
+const app = require('../app');
+const debug = require('debug')('web:server');
+const http = require('http');
 
-let bodyParser = require('body-parser');
-
-let db = require('@novelreader/core/index');
+const db = require('@novelreader/core/index');
 
 /**
  * Get port from environment and store in Express.

@@ -1,4 +1,0 @@
-{
-    "appService.defaultWebAppToDeploy": "/subscriptions/53636a28-64ae-4ec2-955c-20e74188a551/resourceGroups/novel-reader/providers/Microsoft.Web/sites/novelreader2",
-    "appService.deploySubpath": "."
-}

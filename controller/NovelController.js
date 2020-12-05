@@ -3,10 +3,11 @@ var Novel = require('../model/Novel');
 //For list
 exports.list = async function (req, res) {
     try {
-        const novels = await Novel.get(req.params.limit);
+        const limit = req.param('limit') == null ? 10 : parseInt(req.param('limit'));
+        const lastChapterUpdate = req.param('lastChapterUpdate') == null ? Date.now() : parseInt(req.param('lastChapterUpdate'));
+        const novels = await Novel.list(lastChapterUpdate, limit);
         res.json({
             status: "success",
-            message: "Got Novel Successfully!",
             data: novels
         });
     } catch (err) {
@@ -17,17 +18,17 @@ exports.list = async function (req, res) {
     }
 };
 // View Novel
-exports.view = function (req, res) {
-    Novel.findById(req.params.novelid, function (err, novel) {
-        if (err)
-            res.json({
-                status: "error",
-                message: err
-            });
+exports.view = async function (req, res) {
+    try {
+        const novel = await Novel.getById(req.param('novelId'));
         res.json({
             status: "success",
-            message: 'Novel Details',
             data: novel
         });
-    });
+    } catch (err) {
+        res.json({
+            status: "error",
+            message: err
+        });
+    }
 };

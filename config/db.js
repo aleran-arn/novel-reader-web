@@ -1,3 +1,3 @@
 module.exports = {
-    url : 'mongodb://novel:4BwhK03ekqCPN9HDIu0JLLAwdlXK5DxfFuv8TYLme7ft5NMIOYNVk4SwduvQV1XI7ZrUQQ7Jq1mY56nQibYGrA%3D%3D@novel.mongo.cosmos.azure.com:10255/?ssl=true&appName=@novel@'
+    url : 'mongodb://novel-reader-db:ePIUUbzKcNU05fxxN3nAmh7vforvtLHgQlifVJuyJP79s8Fkg7p0ez9euv1CDSbnTUCIKMKxoFDhe7EBe06YEw%3D%3D@novel-reader-db.mongo.cosmos.azure.com:10255/?ssl=true&appName=@novel-reader-db@'
   };

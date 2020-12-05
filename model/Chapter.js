@@ -6,6 +6,11 @@ const chapterSchema = mongoose.Schema({
         required: true,
         index: true,
     },
+    chapterId: {
+        type: String,
+        required: true,
+        index: true,
+    },
     number: {
         type: Number,
         required: true,
@@ -14,6 +19,10 @@ const chapterSchema = mongoose.Schema({
     title: {
         type: String,
         required: true,
+    },
+    prevChapterId: {
+        type: String,
+        index: true,
     },
     prevChapterHref: {
         type: String,
@@ -26,17 +35,22 @@ const chapterSchema = mongoose.Schema({
 
 // Export Chapter Model
 const Chapter = module.exports = mongoose.model('chapters', chapterSchema);
-module.exports.get = function (novelId, chapterNumber) {
-    return Chapter.findOne({ novelId: novelId, number: chapterNumber }).exec();
+
+module.exports.list = async function (novelId) {
+    return Chapter.find({ novelId: novelId }).exec();
 };
 
-module.exports.getNovelChapterNumbers = async function (novelId) {
+module.exports.get = async function (novelId, chapterId) {
+    return Chapter.findOne({ novelId: novelId, chapterId: chapterId }).exec();
+};
+
+module.exports.getNovelChapterIds = async function (novelId) {
     const chapters = await Chapter.find({ novelId: novelId })
-        .select('number')
+        .select('chapterId')
         .exec();
     var chapterNumberSet = new Set();
     for (const chapter of chapters) {
-        chapterNumberSet.add(chapter.number);
+        chapterNumberSet.add(chapter.chapterId);
     }
     return chapterNumberSet;
 };

@@ -13,7 +13,11 @@ const novelSchema = mongoose.Schema({
     description: {
         type: String,
     },
-    lastChapterNumber: {
+    coverHref: {
+        type: String,
+        required: true,
+    },
+    lastChapterId: {
         type: String,
         required: true,
     },
@@ -27,14 +31,17 @@ const novelSchema = mongoose.Schema({
         index: true,
     }
 },
-{
-    bufferCommands: false,
-});
+    {
+        bufferCommands: false,
+    });
 
 // Export Novel Model
 const Novel = module.exports = mongoose.model('novels', novelSchema);
-module.exports.get = function (limit) {
-    return Novel.find().sort({ lastChapterUpdate: 'desc' }).limit(limit).exec();
+module.exports.list = function (lastUpdate, limit) {
+    return Novel.find({ lastChapterUpdate: { $lt: lastUpdate } })
+        .sort({ lastChapterUpdate: 'desc' })
+        .limit(limit)
+        .exec();
 };
 
 module.exports.getById = function (novelId) {

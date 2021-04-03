@@ -30,7 +30,7 @@ var server = http.createServer(app);
  */
 connection.then(() => {
   console.log('connected');
-  server.listen(port);
+  server.listen(port, '0.0.0.0');
 })
   .catch(error => {
     console.log(error, 'error');

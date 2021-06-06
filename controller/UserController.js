@@ -1,6 +1,6 @@
 //Import Model
-var Novel = require('../model/Novel');
-var User = require('../model/User');
+var Novel = require('@novelreader/core/model/Novel');
+var User = require('@novelreader/core/model/User');
 //For list
 exports.usernovels = async function (req, res) {
     try {

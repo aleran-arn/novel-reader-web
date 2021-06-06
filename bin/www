@@ -9,10 +9,9 @@ const debug = require('debug')('web:server');
 const http = require('http');
 const mongoose = require('mongoose');
 
-const dbConf = require('../config/db');
+const db = require('@novelreader/core/index');
 
-const options = { useNewUrlParser: true, useUnifiedTopology: true };
-const connection =  mongoose.connect(dbConf.url, options);
+const connection =  db.dbConnection;
 /**
  * Get port from environment and store in Express.
  */

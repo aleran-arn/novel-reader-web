@@ -11,10 +11,8 @@ exports.list = async function (req, res) {
             data: novels
         });
     } catch (err) {
-        res.json({
-            status: "error",
-            message: err
-        });
+        console.log(err);
+        res.sendStatus(500);
     }
 };
 // View Novel
@@ -26,9 +24,7 @@ exports.view = async function (req, res) {
             data: novel
         });
     } catch (err) {
-        res.json({
-            status: "error",
-            message: err
-        });
+        console.log(err);
+        res.sendStatus(500);
     }
 };

@@ -9,16 +9,18 @@ exports.list = async function (req, res) {
             data: chapters
         });
     } catch (err) {
-        res.json({
-            status: "error",
-            message: err
-        });
+        console.log(err);
+        res.sendStatus(500);
     }
 };
 // View Novel
 exports.view = async function (req, res) {
     try {
-        const chapter = await Chapter.get(req.param('novelId'), req.param('chapterId'));
+        const chapter = await Chapter.getById(req.param('chapterId'));
+        if (chapter == null) {
+            res.sendStatus(404);
+            return; 
+        }
         const nextChapter = await Chapter.findOne({ prevChapterId: chapter.chapterId })
             .select('chapterId')
             .exec();
@@ -31,9 +33,7 @@ exports.view = async function (req, res) {
             }
         });
     } catch (err) {
-        res.json({
-            status: "error",
-            message: err
-        });
+        console.log(err);
+        res.sendStatus(500);
     }
 };
